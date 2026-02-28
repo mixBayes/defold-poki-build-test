@@ -10,8 +10,34 @@ After installation, invoke it in Codex with prompts like:
 
 - `Use $defold-poki-build-test to build and smoke-test this Defold Poki project.`
 - `Use $defold-poki-build-test and fail on console errors after the smoke test.`
+- `在项目 X 对 390x844, 768x1024, 1920x1080 做缩放测试，检查 UI 是否重叠/裁切，输出每个分辨率截图和结论。`
 
 The skill is designed to orchestrate the workflow safely and consistently.
+
+## Direct Agent Command (Viewport Regression)
+
+You can directly send this instruction to the agent:
+
+```text
+在项目 X 对 390x844, 768x1024, 1920x1080 做缩放测试，检查 UI 是否重叠/裁切，输出每个分辨率截图和结论。
+```
+
+Recommended output expectation:
+
+- Screenshot for each viewport (`390x844`, `768x1024`, `1920x1080`)
+- A pass/fail conclusion for each viewport
+- File/element evidence when overlap, clipping, or deformation is detected
+
+## Triggering Post-Feature Validation
+
+Current setup does not provide an event hook like "auto-run when coding is done".
+Use a fixed completion phrase in your prompt so the agent reliably triggers validation:
+
+```text
+Defold 功能已实现完成，请自动调用 $defold-poki-build-test 测试刚实现的功能；如果涉及 UI，自带 390x844, 768x1024, 1920x1080 缩放检查并输出截图和结论。
+```
+
+This phrase makes the validation intent explicit and keeps runs deterministic/reproducible in CI and local workflows.
 
 ## Install in Codex
 

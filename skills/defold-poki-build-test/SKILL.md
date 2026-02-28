@@ -1,6 +1,6 @@
 ---
 name: defold-poki-build-test
-description: Use when a Defold HTML5 game for Poki needs reproducible CLI build, Playwright browser smoke testing, or failure troubleshooting before sharing, release, or CI hardening.
+description: Use when a Defold HTML5 game for Poki needs reproducible CLI build, Playwright browser smoke testing, post-feature verification, or failure troubleshooting before sharing, release, or CI hardening.
 ---
 
 # Defold Poki Build Test
@@ -18,7 +18,7 @@ Run deterministic Defold web build and Playwright smoke test via bundled scripts
 
 ## Invocation
 
-When the user asks to build/test a Defold Poki web project, invoke this skill and run:
+When the user asks to build/test a Defold Poki web project, or says a Defold feature is implemented and needs validation, invoke this skill and run:
 
 `Use $defold-poki-build-test to build and smoke-test this Defold Poki project.`
 
@@ -29,6 +29,7 @@ When the user asks to build/test a Defold Poki web project, invoke this skill an
 3. Execute from target project root, or pass `--root <project-dir>`.
 4. On failure, read `references/troubleshooting.md` and fix the first blocking issue.
 5. Keep `--strict-console` off by default unless user or CI policy requires hard-fail on console errors.
+6. If user asks viewport/UI regression checks, include requested viewport sizes and provide screenshot-based conclusions per viewport.
 
 ## Commands
 

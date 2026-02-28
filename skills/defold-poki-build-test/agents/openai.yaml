@@ -1,4 +1,4 @@
 interface:
   display_name: "Defold Poki Build Test"
   short_description: "Build and Playwright-test Defold Poki HTML5 games"
-  default_prompt: "Use $defold-poki-build-test to build a Defold Poki project and run Playwright smoke tests."
+  default_prompt: "Use $defold-poki-build-test to validate a Defold feature after implementation: run build + Playwright smoke tests, and when UI is involved include 390x844, 768x1024, 1920x1080 viewport checks with screenshots and conclusions."
