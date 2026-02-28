@@ -23,6 +23,8 @@ Tell Codex:
 Fetch and follow instructions from https://raw.githubusercontent.com/mixBayes/defold-poki-build-test/refs/heads/main/.codex/INSTALL.md
 ```
 
+The install instructions explicitly force `--method git` to preserve executable bits on shell scripts.
+
 ## What It Does
 
 - Standardizes Defold web build parameters (default `wasm-web`)
