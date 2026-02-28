@@ -14,6 +14,7 @@ Run deterministic Defold web build and Playwright smoke test via bundled scripts
 - Require a Defold installation at `/Applications/Defold.app`.
 - Require a project root containing `game.project`.
 - Require `npx` and internet access for the first `@playwright/cli` run.
+- Require `python3` for local static serving during tests.
 
 ## Invocation
 
