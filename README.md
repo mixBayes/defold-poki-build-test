@@ -20,7 +20,8 @@ Replace `<owner>/<repo>` with your published repository:
 ```bash
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}" \
 python "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
-  --url "https://github.com/<owner>/<repo>/tree/main"
+  --repo "<owner>/<repo>" \
+  --path "skills/defold-poki-build-test"
 ```
 
 Restart Codex after installation.
@@ -49,13 +50,17 @@ Restart Codex after installation.
 
 ```text
 .
-├── SKILL.md
-├── agents/openai.yaml
-├── scripts/
-│   ├── build_defold.sh
-│   ├── test_playwright.sh
-│   └── run_all.sh
-└── references/troubleshooting.md
+├── README.md
+├── LICENSE
+└── skills/
+    └── defold-poki-build-test/
+        ├── SKILL.md
+        ├── agents/openai.yaml
+        ├── scripts/
+        │   ├── build_defold.sh
+        │   ├── test_playwright.sh
+        │   └── run_all.sh
+        └── references/troubleshooting.md
 ```
 
 ## Direct Script Usage (Advanced / Non-Codex)
@@ -63,14 +68,17 @@ Restart Codex after installation.
 If you are running outside Codex, you can execute scripts directly:
 
 ```bash
+SKILL_REPO="/path/to/this-repo"
+GAME_ROOT="/path/to/defold-game-project" # contains game.project
+
 # Build only
-./scripts/build_defold.sh --root .
+"$SKILL_REPO/skills/defold-poki-build-test/scripts/build_defold.sh" --root "$GAME_ROOT"
 
 # Test only (requires dist/<title>/index.html)
-./scripts/test_playwright.sh --root .
+"$SKILL_REPO/skills/defold-poki-build-test/scripts/test_playwright.sh" --root "$GAME_ROOT"
 
 # Build + test
-./scripts/run_all.sh --root .
+"$SKILL_REPO/skills/defold-poki-build-test/scripts/run_all.sh" --root "$GAME_ROOT"
 ```
 
 ## CI Notes
@@ -80,4 +88,4 @@ If you are running outside Codex, you can execute scripts directly:
 
 ## Troubleshooting
 
-See [references/troubleshooting.md](./references/troubleshooting.md).
+See [skills/defold-poki-build-test/references/troubleshooting.md](./skills/defold-poki-build-test/references/troubleshooting.md).
