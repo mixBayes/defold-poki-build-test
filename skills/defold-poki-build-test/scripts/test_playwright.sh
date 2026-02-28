@@ -6,6 +6,7 @@ BUNDLE_DIR=""
 HOST="localhost"
 PORT="17321"
 OUTPUT_DIR="output/playwright"
+PW_SESSION="default"
 STRICT_CONSOLE=0
 
 usage() {
@@ -19,6 +20,7 @@ Options:
   --host <ip>             HTTP bind host (default: localhost)
   --port <num>            HTTP port (default: 17321)
   --output-dir <dir>      Artifact output directory (default: output/playwright)
+  --session <name>        Playwright browser session name (default: default)
   --strict-console        Fail if Playwright console error count > 0
   --help                  Show this help
 EOF
@@ -46,6 +48,10 @@ while [[ $# -gt 0 ]]; do
       OUTPUT_DIR="${2:-}"
       shift 2
       ;;
+    --session)
+      PW_SESSION="${2:-}"
+      shift 2
+      ;;
     --strict-console)
       STRICT_CONSOLE=1
       shift
@@ -62,7 +68,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -z "$ROOT" || -z "$HOST" || -z "$PORT" || -z "$OUTPUT_DIR" ]]; then
+if [[ -z "$ROOT" || -z "$HOST" || -z "$PORT" || -z "$OUTPUT_DIR" || -z "$PW_SESSION" ]]; then
   echo "Invalid empty argument." >&2
   usage
   exit 2
@@ -119,7 +125,7 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 
-PWCLI=(npx --yes --package @playwright/cli playwright-cli)
+PWCLI=(npx --yes --package @playwright/cli playwright-cli "-s=$PW_SESSION")
 
 if [[ "$OUTPUT_DIR" = /* ]]; then
   OUTPUT_ABS="$OUTPUT_DIR"
@@ -137,7 +143,7 @@ cleanup() {
     kill "$SERVER_PID" >/dev/null 2>&1 || true
     wait "$SERVER_PID" >/dev/null 2>&1 || true
   fi
-  "${PWCLI[@]}" close-all >/dev/null 2>&1 || true
+  "${PWCLI[@]}" close >/dev/null 2>&1 || true
 }
 trap cleanup EXIT
 
@@ -176,6 +182,7 @@ fi
 
 echo "[test] url=$URL"
 echo "[test] artifacts=$ARTIFACT_DIR"
+echo "[test] session=$PW_SESSION"
 echo "[test] console_errors=$ERROR_COUNT"
 
 if [[ "$STRICT_CONSOLE" -eq 1 && "$ERROR_COUNT" -gt 0 ]]; then
