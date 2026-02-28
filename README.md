@@ -15,16 +15,13 @@ The skill is designed to orchestrate the workflow safely and consistently.
 
 ## Install in Codex
 
-Replace `<owner>/<repo>` with your published repository:
+### Codex
 
-```bash
-CODEX_HOME="${CODEX_HOME:-$HOME/.codex}" \
-python "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
-  --repo "<owner>/<repo>" \
-  --path "skills/defold-poki-build-test"
+Tell Codex:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/mixBayes/defold-poki-build-test/refs/heads/main/.codex/INSTALL.md
 ```
-
-Restart Codex after installation.
 
 ## What It Does
 
